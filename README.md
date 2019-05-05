@@ -43,11 +43,11 @@ npm install
 
 ### Backend notes
 * To start development, configure mutations and subscriptions in `backend/backend.ts` & `backend/schema.graphql`
-* Backend only includes a http server, secure connections/certificates should be handles via a reverse proxy
+* Backend only includes a http server, secure connections/certificates should be handled via a reverse proxy
 * For multipart upload support (outside graphql) install multer (https://www.npmjs.com/package/multer)
-* Backend interface definitions can be found at `backend/interfaces.ts`
+* Backend interface definitions can be found in `backend/interfaces.ts`
 * Mockup authentication can be found in `backend/server.ts`
-* NPM Scripts are currently for configured for a Win32 environment -- slight changes may be required to get them working on other systems
+* NPM Scripts are currently configured for a Win32 environment -- slight changes may be required to get them working on other systems
 
 ## Frontend
 ### Libraries
@@ -60,19 +60,19 @@ npm install
 | Tests | (none) |
 
 ### Frontend notes
-* Shared configuration (via webpack) can be accessed on `window.config`
+* Shared configuration (via webpack) can be accessed from `window.config`
 * GQL subscriptions, client and cache can be imported from `frontend/link.tsx`
 * Packed resources (images, icons, etc) can be imported from `resources/`
 * Frontend interface definitions can be found at `frontend/interfaces.ts`
 
 ## Other
-| Tech  |  |
+|  |  |
 | ------------- | ------------- |
 | Webpack | ✓ |
 | Cookie sessions | ✓ |
-| GQL Transport | HTTP/HTTPS/WS |
 | GQL Uploads | ✓ |
 | GQL Subscriptions | ✓ |
+| GQL Transport | HTTP/HTTPS/WS |
 
 
 ## Todo List
