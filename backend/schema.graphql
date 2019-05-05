@@ -1,0 +1,27 @@
+scalar Date
+scalar Upload
+
+type User {
+	name: String,
+}
+
+type Login {
+	token: String,
+	user: User,
+}
+
+type Query {
+	login: Login,
+}
+
+# type Mutation {
+# }
+
+# type Subscription {
+# }
+
+schema {
+	query: Query
+	# mutation: Mutation,
+	# subscription: Subscription,
+}

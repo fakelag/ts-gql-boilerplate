@@ -1,0 +1,89 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	overflow-x: hidden;
+	overflow-y: hidden;
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	font-family: "Roboto";
+
+	--font-size: 16px;
+	font-size: var(--font-size, 16px);
+}
+
+@media screen and (max-width: 1920px) { /* FHD 1920x1080 */
+	 html {
+		font-size: calc(var(--font-size, 16px) / 1080 * 1080);
+	}
+}
+
+.Center {
+    margin: auto;
+}
+
+.Page {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+    top: 4.0625rem;
+    left: 0rem;
+    width: 100%;
+    height: calc(100% - 4.0625rem);
+    background: linear-gradient(#6494B1, #3174ad);
+}
+
+.Paper {
+    font-family: "Roboto";
+    background: #fff;
+    padding: 0.75rem;
+    box-shadow: 0px 0px 0.25rem rgba(0, 0, 0, 0.25);
+    border-radius: 0px 0.125rem 0.125rem 0.125rem;
+}
+
+.TextField {
+	display: inline-flex;
+	border: solid 0.0625rem #d9e2ec;
+	background-color: #ffffff;
+	height: 1.125rem;
+	max-height: 1.125rem;
+	overflow: hidden;
+	padding: 0.6875rem;
+    transition: 0.15s;
+
+    &[is-focused="1"] {
+        border: solid 0.0625rem #054158;
+        border-radius: 2rem;
+    }
+}
+
+.TextFieldInput {
+	display: inline-block;
+	width: 100%;
+	border: none;
+	outline: none;
+	font-family: "Roboto";
+	font-size: 0.875rem;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+    letter-spacing: -0.0125rem;
+    color: #000;
+	flex: 1;
+}

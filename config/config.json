@@ -1,0 +1,13 @@
+{
+	"backend": {
+		"wsSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+		"cookieSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+		"port": 8080
+	},
+	"shared": {
+		"sessionDuration": 1440,
+		"sessionExtend": 60,
+		"domain": "localhost:8080",
+		"secure": false
+	}
+}
