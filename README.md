@@ -81,5 +81,6 @@ npm install
 * Add a login form
 * Add some example development GQL endpoints
 * Add an example GQL subscription
+* Add a build script
 * Fix render flicker with first login request
 * Refactor websocket state handling
