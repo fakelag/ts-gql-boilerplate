@@ -1,7 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
-import { subscriptionClient } from '../link';
+import { client, subscriptionClient } from '../link';
 
 import App from './App';
 import Login from '../components/Login';
@@ -23,6 +22,7 @@ interface IRootStateProps {}
 interface IRootActions {}
 
 interface IRootState {
+	fetched: boolean;
 	login: I.ILoginData | null;
 }
 
@@ -30,6 +30,7 @@ interface IRootProps extends IRootStateProps, IRootActions {}
 
 class Root extends React.Component<IRootProps, IRootState> {
 	public state: IRootState = {
+		fetched: false,
 		login: null,
 	};
 
@@ -37,10 +38,21 @@ class Root extends React.Component<IRootProps, IRootState> {
 		super(props);
 	}
 
+	public componentWillMount() {
+		client.query({
+			query: Q_LOGIN,
+		}).then((result: any) => {
+			if (result.data && result.data.login)
+				this.login(result.data.login);
+			else
+				this.setState({ fetched: true });
+		});
+	}
+
 	public login = (login: I.ILoginData) => {
 		if (login && login.token) {
-			subscriptionClient.on('connected', (a: any) => this.setState({ login }));
-			subscriptionClient.on('reconnected', (a: any) => this.setState({ login }));
+			subscriptionClient.on('connected', (a: any) => this.setState({ login, fetched: true }));
+			subscriptionClient.on('reconnected', (a: any) => this.setState({ login, fetched: true }));
 			subscriptionClient.connectionParams = () => login.token;
 		} else {
 			this.setState({ login: null });
@@ -48,23 +60,13 @@ class Root extends React.Component<IRootProps, IRootState> {
 	}
 
 	public render() {
+		if (!this.state.fetched)
+			return null;
+
 		return (<React.Fragment>
-			<Query query={Q_LOGIN}>
-				{({ loading, error, data }) => {
-					if (loading) return 'Loading...';
-					if (error) return `Error! ${error.message}`;
-
-					if (data && data.login && data.login.user) {
-						if (!this.state.login)
-							this.login(data.login);
-					}
-
-					if (!this.state.login)
-						return <Login />;
-
-					return <App login={this.state.login} />;
-				}}
-			</Query>
+				{this.state.login
+					? <App login={this.state.login!} />
+					: <Login key="MainLogin" />}
 		</React.Fragment>);
 	}
 }
