@@ -1,3 +1,4 @@
+import express = require('express');
 import mongoose from 'mongoose';
 
 export interface IUserData {
@@ -8,6 +9,14 @@ export interface IUserData {
 
 export interface IUser extends IUserData, mongoose.Document  {
 	getUserName(): string;
+}
+
+export interface ISession {
+	user: string | null | undefined;
+}
+
+export interface IRequest extends express.Request {
+	session?: ISession;
 }
 
 export interface IGQLContext {

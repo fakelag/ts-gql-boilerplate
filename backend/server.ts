@@ -7,6 +7,7 @@ import config = require('../config/config.json');
 import webpackMiddleWare = require('webpack-dev-middleware');
 import webpackConfig = require('../config/webpack.config');
 
+import * as I from './interfaces';
 import * as db from './database';
 import * as backend from './backend';
 
@@ -39,16 +40,35 @@ app.use(sessions({
 	secret: config.backend.cookieSecret,
 }));
 
-app.get('/login', async (req: any, res: express.Response, next: express.NextFunction) => {
-	const user = await db.UserModel.findOne({ name: 'FakeLag' }, {}, { lean: true }).select({ _id: 1 });
+app.post('/login', async (req: I.IRequest, res: express.Response, next: express.NextFunction) => {
+	if (!req.body.name)
+		return res.sendStatus(400);
+
+	if (!req.body.passwd)
+		return res.sendStatus(400);
+
+	const user: I.IUser | null = await db.UserModel.findOne({ name: req.body.name, passwd: req.body.passwd },
+		{}, { lean: true }).select({ _id: 1 });
 
 	if (user) {
 		req.session = {
 			user: user._id,
 		};
+
+		res.send(user._id);
+	} else {
+		res.sendStatus(401);
 	}
 
-	next();
+	return true;
+});
+
+app.get('/logout', async (req: I.IRequest, res: express.Response, next: express.NextFunction) => {
+	req.session! = {
+		user: null,
+	};
+
+	res.redirect('/');
 });
 
 const httpServer = backend.init(app);
