@@ -53,7 +53,7 @@ npm install
 ### Libraries
 | Part  | Tech |
 | ------------- | ------------- |
-| Core | React/Redux |
+| Core | React |
 | History | React Router |
 | Communication | GraphQL |
 | Styles | Sass |
@@ -78,9 +78,7 @@ npm install
 ## Todo List
 * Add `passport` authentication support (+ Support for Google OAuth)
 * Add clientside session timeout management
-* Add a login form
 * Add some example development GQL endpoints
 * Add an example GQL subscription
 * Add a build script
-* Fix render flicker with first login request
 * Refactor websocket state handling
