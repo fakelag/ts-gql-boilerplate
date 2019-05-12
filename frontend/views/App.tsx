@@ -1,6 +1,9 @@
 import React from 'react';
-import TextBox from '../components/TextBox';
+import Page from './Page';
+import Login from '../components/Login';
+import { Router, Route, Switch } from 'react-router';
 
+import { default as router } from '../history';
 import * as I from '../interfaces';
 
 interface IAppStateProps {}
@@ -29,17 +32,12 @@ class App extends React.Component<IAppProps, IAppState> {
 
 	public render() {
 		return (<React.Fragment>
-			<div className="Page">
-				<p>
-					Looks like it runs <br />
-					Here is a text box <br />
-					<TextBox
-						isEditable
-						startsEditing={false}
-						onChange={(value: string) => console.log(value)}
-					/>
-				</p>
-			</div>
+			<Router history={router}>
+				<Switch>
+					<Route path="/login" component={Login}/>
+					<Route path="*" component={Page}/>
+				</Switch>
+			</Router>
 		</React.Fragment>);
 	}
 }
